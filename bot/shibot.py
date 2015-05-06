@@ -38,16 +38,18 @@ mode_test = True
 
 # リプライテキスト
 def get_reply_text(text):
-    if text in replies:
-        return replies[text]
+    for k, v in replies.items():
+        if k in text:
+            return v
     else:
         return random.choice(random_replies)
 
 
 # 反応テキスト
 def get_react_text(text):
-    if text in reactions:
-        return reactions[text]
+    for k, v in reactions.items():
+        if k in text:
+            return v
     else:
         return ""
 
@@ -134,14 +136,18 @@ if __name__ == '__main__':
                         is_mention = True
 
             if is_mention:
-                print("[Info] Mentioned from @" + screen_name + " (id=" + str(id)+ ", text=" + msg["text"] + ")")
-                reply_text = get_reply_text(msg["text"])
-                if reply_text != "":
-                    do_reply(t, id, screen_name, reply_text)
+                # 自分へはリプライしない
+                if screen_name != SHIBOT:
+                    print("[Info] Mentioned from @" + screen_name + " (id=" + str(id)+ ", text=" + msg["text"] + ")")
+                    reply_text = get_reply_text(msg["text"])
+                    if reply_text != "":
+                        do_reply(t, id, screen_name, reply_text)
 
             # 通常postへの反応
             else:
-                print("[Info] Posted from @" + screen_name + " (id=" + str(id)+ ", text=" + msg["text"] + ")")
-                reply_text = get_react_text(msg["text"])
-                if reply_text != "":
-                    do_reply(t, id, screen_name, reply_text)
+                # 自分へはリプライしない
+                if screen_name != SHIBOT:
+                    print("[Info] Posted from @" + screen_name + " (id=" + str(id)+ ", text=" + msg["text"] + ")")
+                    reply_text = get_react_text(msg["text"])
+                    if reply_text != "":
+                        do_reply(t, id, screen_name, reply_text)
