@@ -33,7 +33,7 @@ random_replies = []
 reactions = {}
 
 # 実行モード
-mode_silent = True
+mode_test = True
 
 
 # リプライテキスト
@@ -58,7 +58,7 @@ def do_reply(t, id, screen_name, text):
         status = "@" + screen_name + " " + text
         print("status: ", status)
         print("in_reply_to_status_id: ", str(id))
-        if not mode_silent:
+        if not mode_test:
             try:
                 t.statuses.update(status=status, in_reply_to_status_id=id)
             except TwitterError as e:
@@ -76,11 +76,11 @@ if __name__ == '__main__':
     # オプション
     print("[Info] argvs: ", argvs)
     print("[Info] argc: ", argc)
-    if (1 < argc) and (argvs[1] == "--silent"):
-        mode_silent = True
+    if (1 < argc) and (argvs[1] == "--test"):
+        mode_test = True
     else:
-        mode_silent = False
-    print("[Info] mode_silent: ", mode_silent)
+        mode_test = False
+    print("[Info] mode_test: ", mode_test)
 
     # CSV読み込み (リプライ)
     with open(os.environ.get("PATH_TO_SHIBOT") + "/csv/replies.csv", "r") as f:
@@ -110,7 +110,7 @@ if __name__ == '__main__':
     t = Twitter(auth=auth)
 
     # 再起動でDM通知
-    if not mode_silent:
+    if not mode_test:
         start_time = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
         status = "起床なう (σω-)。о゜" + start_time
         for admin in ADMINISTRATORS:
