@@ -41,9 +41,11 @@ def get_reply_text(text):
     # ロト6
     if "ロト6" in text:
         numbers = []
-        for i in range(0, 6):
-            numbers.append(str(random.randint(1, 43)))
-        return " ".join(numbers)
+        for i in range(1, 44):
+            numbers.append(str(i))
+        random.shuffle(numbers)
+        loto6 = numbers[:6]
+        return " ".join(loto6)
 
     for k, v in replies.items():
         if k in text:
