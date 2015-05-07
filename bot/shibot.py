@@ -38,6 +38,13 @@ mode_test = True
 
 # リプライテキスト
 def get_reply_text(text):
+    # ロト6
+    if "ロト6" in text:
+        numbers = []
+        for i in range(0, 6):
+            numbers.append(str(random.randint(1, 43)))
+        return " ".join(numbers)
+
     for k, v in replies.items():
         if k in text:
             return v
