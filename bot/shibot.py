@@ -50,8 +50,7 @@ def get_reply_text(text):
     for k, v in replies.items():
         if k in text:
             return v
-    else:
-        return random.choice(random_replies)
+    return random.choice(random_replies)
 
 
 # 反応テキスト
@@ -59,8 +58,7 @@ def get_react_text(text):
     for k, v in reactions.items():
         if k in text:
             return v
-    else:
-        return ""
+    return ""
 
 
 # リプライする
