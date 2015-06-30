@@ -24,7 +24,7 @@ ACCESS_TOKEN_SECRET = os.environ.get("SHIBOT_ACCESS_TOKEN_SECRET")
 
 # その他のコンフィグ
 SHIBOT         = "shi_mt_bot"
-ADMINISTRATORS = ["transcend_msw", "kotarotrd"]
+ADMINISTRATORS = ["kotarotrd"]
 
 
 # リプライと反応ワードの辞書/リスト
