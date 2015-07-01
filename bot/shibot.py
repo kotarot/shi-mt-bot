@@ -24,7 +24,6 @@ ACCESS_TOKEN_SECRET = os.environ.get("SHIBOT_ACCESS_TOKEN_SECRET")
 
 # その他のコンフィグ
 SHIBOT         = "shi_mt_bot"
-ADMINISTRATORS = ["transcend_msw", "kotarotrd"]
 
 
 # リプライと反応ワードの辞書/リスト
@@ -118,12 +117,6 @@ if __name__ == '__main__':
     # REST
     t = Twitter(auth=auth)
 
-    # 再起動でDM通知
-    if not mode_test:
-        start_time = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-        status = "起床なう (σω-)。о゜" + start_time
-        for admin in ADMINISTRATORS:
-            t.direct_messages.new(user=admin, text=status)
 
     # User streams
     ts = TwitterStream(auth=auth, domain="userstream.twitter.com")
