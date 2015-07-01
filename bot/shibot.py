@@ -146,7 +146,7 @@ if __name__ == '__main__':
             # 通常postへの反応
             else:
                 # 自分へはリプライしない / screen_name に bot が含まれるアカウントにもリプライしない
-                if screen_name != SHIBOT and "bot" in screen_name:
+                if screen_name != SHIBOT and "bot" not in screen_name:
                     print("[Info] Posted from @" + screen_name + " (id=" + str(id)+ ", text=" + msg["text"] + ")")
                     reply_text = get_react_text(msg["text"])
                     if reply_text != "":
