@@ -39,28 +39,21 @@ mode_test = True
 def get_reply_text(text):
     # ロト6 (1~43)
     if "ロト6" in text:
-        numbers = [i for i in range(1, 44)]
+        numbers = range(1, 44)
         random.shuffle(numbers)
-        loto = sorted(numbers[:6])
-        loto = [str(i) for i in loto]
-        return " ".join(loto)
+        return ' '.join([str(i) for i in sorted(numbers[:6])])
 
     # ロト7 (1~37)
     if "ロト7" in text:
-        numbers = [i for i in range(1, 38)]
+        numbers = range(1, 38)
         random.shuffle(numbers)
-        loto = sorted(numbers[:7])
-        loto = [str(i) for i in loto]
-        return " ".join(loto)
+        return ' '.join([str(i) for i in sorted(numbers[:7])])
 
     # ミニロト (1~31)
     if "ミニロト" in text:
-        numbers = [i for i in range(1, 32)]
+        numbers = range(1, 32)
         random.shuffle(numbers)
-        loto = sorted(numbers[:5])
-        loto = [str(i) for i in loto]
-        return " ".join(loto)
-
+        return ' '.join([str(i) for i in sorted(numbers[:5])])
 
     for k, v in replies.items():
         if k in text:
