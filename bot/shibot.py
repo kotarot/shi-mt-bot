@@ -39,19 +39,19 @@ mode_test = True
 def get_reply_text(text):
     # ロト6 (1~43)
     if "ロト6" in text:
-        numbers = range(1, 44)
+        numbers = [i for i in range(1, 44)]
         random.shuffle(numbers)
         return ' '.join([str(i) for i in sorted(numbers[:6])])
 
     # ロト7 (1~37)
     if "ロト7" in text:
-        numbers = range(1, 38)
+        numbers = [i for i in range(1, 38)]
         random.shuffle(numbers)
         return ' '.join([str(i) for i in sorted(numbers[:7])])
 
     # ミニロト (1~31)
     if "ミニロト" in text:
-        numbers = range(1, 32)
+        numbers = [i for i in range(1, 32)]
         random.shuffle(numbers)
         return ' '.join([str(i) for i in sorted(numbers[:5])])
 
