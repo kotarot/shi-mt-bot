@@ -37,7 +37,7 @@ mode_test = True
 
 # リプライテキスト
 def get_reply_text(text):
-    # ロト6
+    # ロト6 (1~43)
     if "ロト6" in text:
         numbers = [i for i in range(1, 44)]
         random.shuffle(numbers)
@@ -45,9 +45,9 @@ def get_reply_text(text):
         loto6 = [str(i) for i in loto6]
         return " ".join(loto6)
 
-    # ロト7
+    # ロト7 (1~37)
     if "ロト7" in text:
-        numbers = [i for i in range(1, 44)]
+        numbers = [i for i in range(1, 38)]
         random.shuffle(numbers)
         loto7 = sorted(numbers[:7])
         loto7 = [str(i) for i in loto7]
