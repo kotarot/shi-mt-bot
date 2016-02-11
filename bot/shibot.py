@@ -140,9 +140,11 @@ if __name__ == '__main__':
             # @メンション の対応
             is_mention = False
             if ("id" in msg) and ("entities" in msg) and ("user_mentions" in msg["entities"]):
-                for user_mention in msg["entities"]["user_mentions"]:
-                    if user_mention["screen_name"] == SHIBOT:
-                        is_mention = True
+                # RT/QT を除く (issue #10)
+                if ("retweeted_status" not in msg) and ("quoted_status" not in msg):
+                    for user_mention in msg["entities"]["user_mentions"]:
+                        if user_mention["screen_name"] == SHIBOT:
+                            is_mention = True
 
             if is_mention:
                 # 自分へはリプライしない
