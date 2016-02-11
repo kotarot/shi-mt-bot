@@ -140,25 +140,29 @@ if __name__ == '__main__':
             # @メンション の対応
             is_mention = False
             if ("id" in msg) and ("entities" in msg) and ("user_mentions" in msg["entities"]):
-                # RT/QT を除く (issue #10)
-                if ("retweeted_status" not in msg) and ("quoted_status" not in msg):
-                    for user_mention in msg["entities"]["user_mentions"]:
-                        if user_mention["screen_name"] == SHIBOT:
-                            is_mention = True
+                for user_mention in msg["entities"]["user_mentions"]:
+                    if user_mention["screen_name"] == SHIBOT:
+                        is_mention = True
 
-            if is_mention:
-                # 自分へはリプライしない
-                if screen_name != SHIBOT:
-                    print("[Info] Mentioned from @" + screen_name + " (id=" + str(id)+ ", text=" + msg["text"] + ")")
-                    reply_text = get_reply_text(msg["text"])
-                    if reply_text != "":
-                        do_reply(t, id, screen_name, reply_text)
+            # RT/QT (issue #10)
+            is_retweet = False
+            if ("retweeted_status" in msg) or ("quoted_status" in msg):
+                is_retweet = True
 
-            # 通常postへの反応
-            else:
-                # 自分へはリプライしない / screen_name に bot が含まれるアカウントにもリプライしない
-                if screen_name != SHIBOT and "bot" not in screen_name:
-                    print("[Info] Posted from @" + screen_name + " (id=" + str(id)+ ", text=" + msg["text"] + ")")
-                    reply_text = get_react_text(msg["text"])
-                    if reply_text != "":
-                        do_reply(t, id, screen_name, reply_text)
+            if (not is_retweet):
+                if is_mention:
+                    # 自分へはリプライしない
+                    if screen_name != SHIBOT:
+                        print("[Info] Mentioned from @" + screen_name + " (id=" + str(id)+ ", text=" + msg["text"] + ")")
+                        reply_text = get_reply_text(msg["text"])
+                        if reply_text != "":
+                            do_reply(t, id, screen_name, reply_text)
+
+                # 通常postへの反応
+                else:
+                    # 自分へはリプライしない / screen_name に bot が含まれるアカウントにもリプライしない
+                    if screen_name != SHIBOT and "bot" not in screen_name:
+                        print("[Info] Posted from @" + screen_name + " (id=" + str(id)+ ", text=" + msg["text"] + ")")
+                        reply_text = get_react_text(msg["text"])
+                        if reply_text != "":
+                            do_reply(t, id, screen_name, reply_text)
