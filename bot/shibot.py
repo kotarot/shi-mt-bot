@@ -6,7 +6,9 @@
 """
 
 from datetime import datetime
+import codecs
 import csv
+import io
 import sys
 import os
 import random
@@ -14,6 +16,8 @@ import random
 # Python Twitter Tools
 # https://github.com/sixohsix/twitter
 from twitter import *
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 
 # Configurations from 環境変数
@@ -100,7 +104,7 @@ if __name__ == '__main__':
     print("[Info] mode_test: ", mode_test)
 
     # CSV読み込み (リプライ)
-    with open(os.environ.get("PATH_TO_SHIBOT") + "/csv/replies.csv", "r") as f:
+    with codecs.open(os.environ.get("PATH_TO_SHIBOT") + "/csv/replies.csv", "r", "utf-8") as f:
         reader = csv.reader(f)
         header = next(reader)
         for line in reader:
@@ -110,7 +114,7 @@ if __name__ == '__main__':
                 replies[line[1]] = line[2]
 
     # CSV読み込み (反応)
-    with open(os.environ.get("PATH_TO_SHIBOT") + "/csv/reactions.csv", "r") as f:
+    with codecs.open(os.environ.get("PATH_TO_SHIBOT") + "/csv/reactions.csv", "r", "utf-8") as f:
         reader = csv.reader(f)
         header = next(reader)
         for line in reader:

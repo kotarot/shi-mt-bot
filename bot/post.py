@@ -5,7 +5,9 @@
 しおり修論大好きbot ランダムポスト
 """
 
+import codecs
 import csv
+import io
 import sys
 import os
 import random
@@ -13,6 +15,8 @@ import random
 # Python Twitter Tools
 # https://github.com/sixohsix/twitter
 from twitter import *
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 
 # Configurations from 環境変数
@@ -54,7 +58,7 @@ if __name__ == '__main__':
     # CSV読み込み
     random_posts = []
     appointed_texts = []
-    with open(os.environ.get("PATH_TO_SHIBOT") + "/csv/posts.csv", "r") as f:
+    with codecs.open(os.environ.get("PATH_TO_SHIBOT") + "/csv/posts.csv", "r", "utf-8") as f:
         reader = csv.reader(f)
         header = next(reader)
         for line in reader:
